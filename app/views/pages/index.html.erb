@@ -1,0 +1,23 @@
+<div class="container" style="margin-top: 40px;">
+  <h1>Events</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Event</th>
+        <th scope="col">Donation Type</th>
+        <th scope="col">Minimum Donation</th>
+        <th scope="col">Slots Open</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @events.each do |event| %>
+        <tr>
+          <td><%= event.name %></td>
+          <td><%= event.donation_type %></td>
+          <td>$<%= (event.min_amount_cents.to_i / 100) %></td>
+          <td><%= event.slots.count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
