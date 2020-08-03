@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_03_185158) do
+ActiveRecord::Schema.define(version: 2020_08_03_204707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,10 +19,10 @@ ActiveRecord::Schema.define(version: 2020_08_03_185158) do
     t.string "name"
     t.string "phone"
     t.string "email"
-    t.integer "amount_cents"
     t.bigint "event_slot_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "amount", precision: 8, scale: 2
     t.index ["event_slot_id"], name: "index_donations_on_event_slot_id"
   end
 
@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(version: 2020_08_03_185158) do
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.string "donation_type"
-    t.string "min_amount_cents"
     t.integer "position"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "min_donation_amount", precision: 8, scale: 2
   end
 
   create_table "slots", force: :cascade do |t|

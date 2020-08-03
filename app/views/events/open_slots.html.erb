@@ -1,0 +1,40 @@
+<div style="max-width: 480px; margin: 0 auto;">
+  <h1>Ghee Boli/Nakaro Sign Up</h1>
+  <h4 style="padding: 1em 0"><%= @event.name %></h4>
+  <p><strong>Please select one of the available slots below:</strong></p>
+  <div class="slots">
+    <% @event.open_slots.each do |event_slot| %>
+    <div class="slot">
+      <input type="radio" id="event_slot_<%= event_slot.id%>" name="event_slot_id" value="<%= event_slot.id %>" style="margin-top: 0.5em; margin-right: 2em;">
+      <label for="event_slot_<%= event_slot.id%>">
+        <strong><%= event_slot.slot.name %></strong><br />
+        <%= event_slot.slot.description %>
+      </label>
+    </div>
+    <% end %>
+  </div>
+  <%= bootstrap_form_for @donation do |f| %>
+    <%= f.alert_message "Please fix the errors below." %>
+    <%= f.text_field :name %>
+    <%= f.email_field :email %>
+    <%= f.text_field :phone %>
+    <%= f.number_field :amount, step: 1 %>
+    <%= f.hidden_field :event_slot_id %>
+    <%= button_tag "Cancel", type: "submit", name: "cancel", value: true, class: "btn" %>
+    <%= f.primary "Confirm Donation", disabled: true, id: "submit" %>
+  <% end %>
+</div>
+<script>
+  var rad = document.getElementsByName("event_slot_id");
+  var prev = null;
+  for (var i = 0; i < rad.length; i++) {
+    rad[i].addEventListener('change', function() {
+        if (this !== prev) {
+            prev = this;
+        }
+        document.getElementById("donation_event_slot_id").value = this.value;
+        document.getElementById("submit").disabled = false;
+        console.log(this.value)
+    });
+  }
+</script>

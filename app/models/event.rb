@@ -10,4 +10,9 @@ class Event < ApplicationRecord
     in: %w(boli nakaro),
     message: "is not 'boli' or 'nakaro'"
   )
+  validates_presence_of :min_donation_amount
+
+  def open_slots
+    event_slots.select{ |event_slot| !event_slot.donation }
+  end
 end
