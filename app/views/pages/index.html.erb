@@ -4,17 +4,27 @@
     <tr>
       <th scope="col">Event</th>
       <th scope="col">Donation Type</th>
+      <th scope="col"></th>
       <th scope="col">Minimum Donation</th>
-      <th scope="col">Slots Open</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= link_to event.name, open_slots_path(id: event.id) %></td>
+        <td><%= event.name %></td>
         <td><%= event.donation_type.capitalize %></td>
+        <td><%= image_tag "jcoco_prime.svg", width: '80px' if event.prime_eligible %></td>
         <td><%= number_to_currency(event.min_donation_amount) %></td>
-        <td><%= event.open_slots.count %></td>
+        <td>
+          <% if event.open_slots.count > 0 && event.donation_type == 'nakaro' %>
+            <%= link_to 'Sign Up', open_slots_path(id: event.id), class: 'btn btn-sm btn-primary' %>
+          <% elsif event.open_slots.count == 0 && event.donation_type == 'nakaro' %>
+            All spots are taken
+          <% elsif event.donation_type == 'boli' %>
+            Available at ghee boli
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

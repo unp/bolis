@@ -1,7 +1,6 @@
 class Donation < ApplicationRecord
   belongs_to :event_slot
   validates_presence_of :name, :phone, :email, :amount, :event_slot_id
-  validates_numericality_of :amount
   validate :amount_meets_min
 
   private
@@ -11,7 +10,8 @@ class Donation < ApplicationRecord
     if amount && amount >= min_amount
       true
     else
-      errors.add(:amount, "Must be at least #{min_amount}")
+      errors.add(:amount, "Must be at least #{
+        ActiveSupport::NumberHelper.number_to_currency(amount)}")
       false
     end
   end
