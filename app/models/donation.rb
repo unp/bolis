@@ -1,6 +1,6 @@
 class Donation < ApplicationRecord
   belongs_to :event_slot
-  validates_presence_of :name, :phone, :email, :amount, :event_slot_id
+  validates_presence_of :name, :phone, :amount, :event_slot_id
   validate :amount_meets_min
 
   private

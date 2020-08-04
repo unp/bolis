@@ -3,12 +3,31 @@
   <h4 style="padding: 1em 0"><%= @event.name %></h4>
   <p><strong>Please select one of the available slots below:</strong></p>
   <div class="slots">
-    <% @event.open_slots.each do |event_slot| %>
+    <% @event.event_slots.each do |event_slot| %>
     <div class="slot">
-      <input type="radio" id="event_slot_<%= event_slot.id%>" name="event_slot_id" value="<%= event_slot.id %>" style="margin-top: 0.5em; margin-right: 2em;">
+      <input
+        type="radio"
+        id="event_slot_<%= event_slot.id%>"
+        name="event_slot_id"
+        value="<%= event_slot.id %>"
+        style="margin-top: 0.5em; margin-right: 2em;"
+        <%= "disabled" unless event_slot.available? %>
+      >
       <label for="event_slot_<%= event_slot.id%>">
-        <strong><%= event_slot.slot.name %></strong><br />
-        <%= event_slot.slot.description %>
+        <strong class="<%= 'disabled' unless event_slot.available? %>">
+          <%= event_slot.slot.name %>
+        </strong>
+        <% if event_slot.available? %>
+          <span class="badge badge-primary">Available</span>
+        <% else %>
+          <span class="badge badge-secondary">Taken</span>
+        <% end %><br />
+        <span class="<%= 'disabled' unless event_slot.available? %>">
+          <%= event_slot.slot.description %>
+        </span>
+        <% if !event_slot.available? %>
+          <br /><strong>Labh taken by: </strong><%= event_slot.donation.name %>
+        <% end %>
       </label>
     </div>
     <% end %>
@@ -26,8 +45,8 @@
       </div>
     <% end %>
     <%= f.text_field :name, label: "Name(s)" %>
-    <%= f.email_field :email, label: "Email Address" %>
     <%= f.telephone_field :phone, label: "Phone Number" %>
+    <%= f.email_field :email, label: "Email Address" %>
     <% if @event.donation_type == "boli" %>
       <%= f.text_field :amount, :class => 'amount', :value => (number_with_precision(f.object.amount, :precision => 2) || 0), prepend: ['$'] %>
     <% end %>
@@ -38,7 +57,7 @@
         <p><strong>Nakaro Amount: <%= number_to_currency(@event.min_donation_amount) %></p>
       <% end %>
       <%= button_tag "Cancel", type: "submit", name: "cancel", value: true, class: "btn" %>
-      <%= f.primary "Confirm Donation", disabled: true, id: "submit" %>
+      <%= f.primary "Confirm Selection", disabled: true, id: "submit" %>
     </div>
   <% end %>
 </div>
@@ -57,12 +76,12 @@
   var prev = null;
   for (var i = 0; i < rad.length; i++) {
     rad[i].addEventListener('change', function() {
-        if (this !== prev) {
-            prev = this;
-        }
-        document.getElementById("donation_event_slot_id").value = this.value;
-        document.getElementById("submit").disabled = false;
-        console.log(this.value)
+      if (this !== prev) {
+          prev = this;
+      }
+      document.getElementById("donation_event_slot_id").value = this.value;
+      document.getElementById("submit").disabled = false;
+      console.log(this.value)
     });
   }
 </script>

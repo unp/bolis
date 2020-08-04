@@ -20,7 +20,9 @@
           <% if event.open_slots.count > 0 && event.donation_type == 'nakaro' %>
             <%= link_to 'Sign Up', open_slots_path(id: event.id), class: 'btn btn-sm btn-primary' %>
           <% elsif event.open_slots.count == 0 && event.donation_type == 'nakaro' %>
-            All spots are taken
+            <% event.event_slots.each_with_index do |event_slot, index| %>
+              <div>Family <%= index + 1 %>: <%= event_slot.donation.name %></div>
+            <% end %>
           <% elsif event.donation_type == 'boli' %>
             Available at ghee boli
           <% end %>
