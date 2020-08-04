@@ -60,7 +60,6 @@
 </div>
 <script>
   var selected_slot = "<%= @donation.event_slot_id %>";
-  console.log("selected slot", selected_slot);
   document.getElementById("donation_event_slot_id").value = selected_slot;
   if (selected_slot) {
     document.getElementById("event_slot_<%= @donation.event_slot_id %>").checked = true;
@@ -78,7 +77,6 @@
       }
       document.getElementById("donation_event_slot_id").value = this.value;
       document.getElementById("submit").disabled = false;
-      console.log(this.value)
     });
   }
 </script>
