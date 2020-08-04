@@ -11,6 +11,12 @@
   </head>
 
   <body class="container" style="margin: 40px auto;">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>">
+        <a href="#" data-dismiss="alert" class="close">×</a>
+        <%= value %>
+      </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

@@ -1,3 +1,8 @@
+<% if user_signed_in? %>
+  <div align="right">
+    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+  </div>
+<% end %>
 <h2 class="mb-5">Swapna Darshan Signup Results</h2>
 <table class="table">
   <thead>
