@@ -25,9 +25,9 @@
         </ul>
       </div>
     <% end %>
-    <%= f.text_field :name %>
-    <%= f.email_field :email %>
-    <%= f.text_field :phone %>
+    <%= f.text_field :name, label: "Name(s)" %>
+    <%= f.email_field :email, label: "Email Address" %>
+    <%= f.telephone_field :phone, label: "Phone Number" %>
     <% if @event.donation_type == "boli" %>
       <%= f.text_field :amount, :class => 'amount', :value => (number_with_precision(f.object.amount, :precision => 2) || 0), prepend: ['$'] %>
     <% end %>
@@ -50,6 +50,9 @@
     document.getElementById("event_slot_<%= @donation.event_slot_id %>").checked = true;
     document.getElementById("submit").disabled = false;
   }
+  var phone = document.getElementById("donation_phone");
+  var im = new Inputmask("(999) 999-9999");
+  im.mask(phone);
   var rad = document.getElementsByName("event_slot_id");
   var prev = null;
   for (var i = 0; i < rad.length; i++) {
