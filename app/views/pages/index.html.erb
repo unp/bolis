@@ -1,33 +1,44 @@
 <h2>JCOCO Swapna Darshan 2020 Signup</h2>
-<table class="table" style="margin-top: 2em;">
-  <thead>
-    <tr>
-      <th scope="col">Event</th>
-      <th scope="col">Type</th>
-      <th scope="col"></th>
-      <th scope="col">Minimum Donation</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @events.each do |event| %>
+<div class="d-none d-md-block">
+  <table class="table" style="margin-top: 2em;">
+    <thead>
       <tr>
-        <td><%= event.name %></td>
-        <td><%= event.donation_type.capitalize %></td>
-        <td><%= image_tag "jcoco_prime.png", width: '80px' if event.prime_eligible %></td>
-        <td><%= number_to_currency(event.min_donation_amount) %></td>
-        <td>
-          <% if event.open_slots.count > 0 && event.donation_type == 'nakaro' %>
-            <%= link_to 'Sign Up', open_slots_path(id: event.id), class: 'btn btn-sm btn-primary' %>
-          <% elsif event.open_slots.count == 0 && event.donation_type == 'nakaro' %>
-            <% event.event_slots.each_with_index do |event_slot, index| %>
-              <div>Family <%= index + 1 %>: <%= event_slot.donation.name %></div>
-            <% end %>
-          <% elsif event.donation_type == 'boli' %>
-            Available at ghee boli
-          <% end %>
-        </td>
+        <th scope="col">Event</th>
+        <th scope="col">Type</th>
+        <th scope="col"></th>
+        <th scope="col">Minimum Donation</th>
+        <th scope="col"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @events.each do |event| %>
+        <tr>
+          <td><%= event.name %></td>
+          <td><%= event.donation_type.capitalize %></td>
+          <td><%= image_tag "jcoco_prime.png", width: '80px' if event.prime_eligible %></td>
+          <td><%= number_to_currency(event.min_donation_amount) %></td>
+          <td>
+            <%= render partial: 'sign_up_message', locals: { event: event } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="d-block d-md-none">
+  <% @events.each do |event| %>
+    <div class="row py-2">
+      <div class="col">
+        <div><strong><%= event.name %></strong></div>
+        <%= event.donation_type.capitalize %>
+        (<%= "Min. " if event.donation_type == 'boli' %><%= number_to_currency(event.min_donation_amount) %>)
+        <% if event.prime_eligible %>
+          <div><%= image_tag "jcoco_prime.png", width: '80px' %></div>
+        <% end %>
+      </div>
+      <div class="col" align="right">
+        <%= render partial: 'sign_up_message', locals: { event: event } %>
+      </div>
+    </div>
+  <% end %>
+</div>
