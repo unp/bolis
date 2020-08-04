@@ -57,3 +57,5 @@ gem "bootstrap", "~> 4.5"
 gem "bootstrap_form", "~> 4.5"
 
 gem "acts_as_list", "~> 1.0"
+
+gem "newrelic_rpm", "~> 6.12"
