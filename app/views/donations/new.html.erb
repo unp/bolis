@@ -53,7 +53,6 @@
     <% end %>
     <%= f.hidden_field :event_slot_id %>
     <div style="text-align: right;">
-      <%= f.hidden_field :amount if @event.donation_type == "nakaro" %>
       <%= button_tag "Cancel", type: "submit", name: "cancel", value: true, class: "btn" %>
       <%= f.primary "Confirm Selection", disabled: true, id: "submit" %>
     </div>

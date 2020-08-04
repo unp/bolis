@@ -1,0 +1,21 @@
+<div style="max-width: 540px; margin: 0 auto;">
+  <h2>Your sign up has been confirmed!</h2>
+  <h4 style="padding: 1em 0"><%= @event.name %></h4>
+  <div><%= @donation.name %></div>
+  <div><%= number_to_phone(@donation.phone) %></div>
+  <div><%= @donation.email %></div>
+  <% if @donation.amount > 0 %>
+    <div class="mt-4">
+      <strong>Donation Amount: <%= number_to_currency(@donation.amount) %></strong>
+      <p class="mt-4">
+        To complete your donation, please mail your check to the following name and address:
+      </p>
+      <p>
+        Jain Center of Central Ohio<br />
+        6683 South Old State Rd.<br />
+        Lewis Center, OH 43035
+      </p>
+    </div>
+  <% end %>
+  <%= link_to 'Back to Homepage', root_path, class: 'btn btn-primary mt-3' %>
+</div>

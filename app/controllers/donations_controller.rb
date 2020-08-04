@@ -8,9 +8,12 @@ class DonationsController < ApplicationController
 
   def create
     @donation = Donation.new(donation_params)
-    @event = @donation.event_slot.event if @donation.event_slot
+    if @donation.event_slot
+      @event = @donation.event_slot.event
+      @donation.amount ||= @donation.event_slot.min_donation_amount
+    end
     if @donation.save
-      redirect_to root_path
+      render "donations/confirm"
     else
       render "donations/new"
     end

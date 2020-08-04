@@ -6,7 +6,7 @@ class Donation < ApplicationRecord
   private
 
   def amount_meets_min
-    min_amount = event_slot.event.min_donation_amount
+    min_amount = event_slot.min_donation_amount
     if amount && amount >= min_amount
       true
     else
