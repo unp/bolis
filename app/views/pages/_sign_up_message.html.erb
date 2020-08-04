@@ -1,5 +1,5 @@
 <% if event.open_slots.count > 0 && event.donation_type == 'nakaro' %>
-  <%= link_to 'Sign Up', open_slots_path(id: event.id), class: 'btn btn-sm btn-primary' %>
+  <%= link_to 'Sign Up', event_path(id: event.id), class: 'btn btn-sm btn-primary' %>
 <% elsif event.open_slots.count == 0 && event.donation_type == 'nakaro' %>
   <% event.event_slots.each_with_index do |event_slot, index| %>
     <div>

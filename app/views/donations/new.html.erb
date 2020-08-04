@@ -25,14 +25,15 @@
         <span class="<%= 'disabled' unless event_slot.available? %>">
           <%= event_slot.slot.description %>
         </span>
+        <div><%= image_tag "jcoco_prime.png", width: '80px' if event_slot.slot.id == Slot.first.id && event_slot.event.prime_eligible %></div>
         <% if !event_slot.available? %>
-          <br /><strong>Labh taken by: </strong><%= event_slot.donation.name %>
+          <strong>Labh taken by: </strong><%= event_slot.donation.name %>
         <% end %>
       </label>
     </div>
     <% end %>
   </div>
-  <%= bootstrap_form_for @donation do |f| %>
+  <%= bootstrap_form_for @donation, url: create_event_path(id: @event.id) do |f| %>
     <% if @donation.errors[:base].length > 0 %>
       <div class="alert alert-danger">
         <p>Please fix the errors below.</p>
@@ -52,10 +53,7 @@
     <% end %>
     <%= f.hidden_field :event_slot_id %>
     <div style="text-align: right;">
-      <% if @event.donation_type == "nakaro" %>
-        <%= f.hidden_field :amount %>
-        <p><strong>Nakaro Amount: <%= number_to_currency(@event.min_donation_amount) %></p>
-      <% end %>
+      <%= f.hidden_field :amount if @event.donation_type == "nakaro" %>
       <%= button_tag "Cancel", type: "submit", name: "cancel", value: true, class: "btn" %>
       <%= f.primary "Confirm Selection", disabled: true, id: "submit" %>
     </div>
