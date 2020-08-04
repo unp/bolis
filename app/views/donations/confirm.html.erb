@@ -1,7 +1,8 @@
 <div style="max-width: 540px; margin: 0 auto;">
   <h2>Your sign up has been confirmed!</h2>
-  <h4 style="padding: 1em 0"><%= @event.name %></h4>
-  <div><%= @donation.name %></div>
+  <h4 class="mt-4"><%= @event.name %></h4>
+  <div><em><%= @event.times %></em></div>
+  <div class="mt-4"><%= @donation.name %></div>
   <div><%= number_to_phone(@donation.phone) %></div>
   <div><%= @donation.email %></div>
   <% if @donation.amount > 0 %>

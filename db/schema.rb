@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_04_083735) do
+ActiveRecord::Schema.define(version: 2020_08_04_201626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2020_08_04_083735) do
     t.datetime "updated_at", precision: 6, null: false
     t.decimal "min_donation_amount", precision: 8, scale: 2
     t.boolean "prime_eligible", default: false, null: false
+    t.string "times"
   end
 
   create_table "slots", force: :cascade do |t|
