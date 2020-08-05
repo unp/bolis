@@ -18,7 +18,7 @@
         <th colspan="3"><%= event.name %></th>
       </tr>
       <% event.event_slots.each do |event_slot| %>
-        <tr class="table-<%= event_slot.donation ? 'success' : 'warning' %>">
+        <tr class="table<%= event_slot.donation ? "-success" : (event_slot.event.donation_type == "nakaro" ? "-warning" : "") %>">
           <td>
             <div><strong><%= event_slot.donation.try(:name) %></strong></div>
             <div><%= event_slot.donation.try(:email) %></div>
