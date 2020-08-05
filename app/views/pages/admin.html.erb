@@ -23,7 +23,11 @@
             <div><strong><%= event_slot.donation.try(:name) %></strong></div>
             <div><%= event_slot.donation.try(:email) %></div>
             <div><%= event_slot.donation.try(:phone) %></div>
-            <div><%= link_to 'Not Taken – Sign Up', event_path(id: event.id) unless event_slot.donation %></div>
+            <% if event_slot.event.donation_type == 'boli' %>
+              <div>Available at ghee boli</div>
+            <% else %>
+              <div><%= link_to 'Not Taken – Sign Up', event_path(id: event.id) unless event_slot.donation %></div>
+            <% end %>
           </td>
           <td><%= event_slot.slot.name %></td>
           <td><%= number_to_currency(event_slot.donation.try(:amount)) %></td>
