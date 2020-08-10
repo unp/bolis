@@ -1,5 +1,6 @@
 class DonationsController < ApplicationController
   before_action :redirect_cancel, only: [:create]
+  before_action :authenticate_user!, only: [:index]
 
   def index
     @donations = Donation.all
