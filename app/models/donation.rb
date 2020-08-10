@@ -1,7 +1,26 @@
+require 'csv'
+
 class Donation < ApplicationRecord
   belongs_to :event_slot
   validates_presence_of :name, :phone, :amount, :event_slot_id
   validate :amount_meets_min
+
+  def self.to_csv
+    CSV.generate(headers: true) do |csv|
+      csv << ["Event", "Name(s)", "Email", "Phone", "Type", "Amount"]
+
+      all.find_each do |donation|
+        csv << [
+          donation.event_slot.event.name,
+          donation.name,
+          donation.email,
+          donation.phone,
+          donation.event_slot.slot.name,
+          ActiveSupport::NumberHelper.number_to_currency(donation.amount)
+        ]
+      end
+    end
+  end
 
   private
 

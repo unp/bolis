@@ -1,6 +1,14 @@
 class DonationsController < ApplicationController
   before_action :redirect_cancel, only: [:create]
 
+  def index
+    @donations = Donation.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @donations.to_csv, filename: "donations-#{Date.today}.csv" }
+    end
+  end
+
   def new
     @event = Event.find(params[:id])
     @donation = Donation.new(amount: @event.min_donation_amount)
