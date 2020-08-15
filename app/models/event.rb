@@ -4,6 +4,7 @@ class Event < ApplicationRecord
 
   acts_as_list
   scope :ordered_by_position, -> { order(position: :asc) }
+  scope :not_archived, -> { where(archived: false) }
 
   validates_inclusion_of(
     :donation_type,
