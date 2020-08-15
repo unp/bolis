@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  has_many :event_slots
+  has_many :event_slots, dependent: :destroy
   has_many :slots, through: :event_slots
 
   acts_as_list
