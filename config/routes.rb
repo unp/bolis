@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  get 'events/:id', to: 'donations#new', as: :event
-  post 'events/:id', to: 'donations#create', as: :create_event
+  get 'events/:id/donations/new', to: 'donations#new', as: :new_donation
+  post 'events/:id/donations', to: 'donations#create', as: :create_donation
+  resources :events, only: [:new, :create, :edit, :update, :destroy]
   resources :donations, only: :index
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'admin', to: 'pages#admin', as: :admin

@@ -1,0 +1,22 @@
+<%= bootstrap_form_for @event do |f| %>
+  <% if @event.errors[:base].length > 0 %>
+    <div class="alert alert-danger">
+      <p>Please fix the errors below.</p>
+      <%= @errors.inspect %>
+      <ul class="rails-bootstrap-forms-error-summary">
+        <% @event.errors[:base].each do |error| %>
+          <li><%= error.message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.text_field :name, label: "Name(s)" %>
+  <%= f.select(:donation_type, [["Nakaro", "nakaro"], ["Boli", "boli"]], label: "Donation Type" ) %>
+  <%= f.text_field :times %>
+  <%= f.text_field :min_donation_amount, :class => 'amount', :value => (number_with_precision(f.object.min_donation_amount, :precision => 2) || 0), prepend: ['$'] %>
+  <%= f.check_box :prime_eligible, label: "Prime Eligible" %>
+  <div style="text-align: right;">
+    <%= link_to 'Cancel', admin_path, class: "btn" %>
+    <%= f.primary "Save", id: "submit" %>
+  </div>
+<% end %>

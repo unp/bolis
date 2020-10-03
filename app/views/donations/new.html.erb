@@ -34,7 +34,7 @@
     </div>
     <% end %>
   </div>
-  <%= bootstrap_form_for @donation, url: create_event_path(id: @event.id) do |f| %>
+  <%= bootstrap_form_for @donation, url: create_donation_path(id: @event.id) do |f| %>
     <% if @donation.errors[:base].length > 0 %>
       <div class="alert alert-danger">
         <p>Please fix the errors below.</p>
