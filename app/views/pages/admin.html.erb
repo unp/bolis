@@ -3,7 +3,10 @@
     <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
   </div>
 <% end %>
-<h2 class="mb-5">Paryushan Signup Results</h2>
+<h2><%= @site.title %></h2>
+<p><%= simple_format(@site.description) %></p>
+<%= link_to "Edit title and description", edit_site_path(@site) %>
+<div class="mb-5"></div>
 <p align="right">
   <%= link_to "New Event", new_event_path, class: 'btn btn-primary btn-sm' %>
   <%= link_to "Manage Slots", slots_path, class: 'btn btn-secondary btn-sm' %>
@@ -51,7 +54,7 @@
           </td>
           <td><%= event_slot.slot.name %></td>
           <td><%= number_to_currency(event_slot.donation.try(:amount)) %></td>
-          <td><%= link_to "Delete", event_slot, method: "delete", data: { confirm: "Are you sure you want to delete this slot? Any associated donation records will also be deleted.", disable_with: "Deleting..." }, class: "text-danger" %></td>
+          <td align="right"><%= link_to "Delete", event_slot, method: "delete", data: { confirm: "Are you sure you want to delete this slot? Any associated donation records will also be deleted.", disable_with: "Deleting..." }, class: "text-danger" %></td>
         </tr>
       <% end %>
     <% end %>

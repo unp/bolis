@@ -1,0 +1,19 @@
+<%= bootstrap_form_for @site do |f| %>
+  <% if @site.errors[:base].length > 0 %>
+    <div class="alert alert-danger">
+      <p>Please fix the errors below.</p>
+      <%= @errors.inspect %>
+      <ul class="rails-bootstrap-forms-error-summary">
+        <% @site.errors[:base].each do |error| %>
+          <li><%= error.message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.text_field :title %>
+  <%= f.text_area :description %>
+  <div style="text-align: right;">
+    <%= link_to 'Cancel', admin_path, class: "btn" %>
+    <%= f.primary "Save", id: "submit" %>
+  </div>
+<% end %>
