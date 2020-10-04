@@ -1,0 +1,29 @@
+<% if user_signed_in? %>
+  <div align="right">
+    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+  </div>
+<% end %>
+<h2 class="mb-5">Manage Event Slots</h2>
+<p align="right">
+  <%= link_to "New Slot", new_slot_path, class: 'btn btn-primary btn-sm' %>
+  <%= link_to "Back To Events", admin_path, class: 'btn btn-sm btn-secondary' %>
+</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @slots.each do |slot| %>
+      <tr>
+        <td><%= slot.name %></td>
+        <td><%= slot.description %></td>
+        <td><%= link_to "Edit", edit_slot_path(slot) %></td>
+        <td><%= link_to "Delete", slot, method: "delete", data: { confirm: "Warning: this slot will fail to delete if it is assigned to any existing events. Are you sure you want to delete this slot?", disable_with: "Deleting..." }, class: "text-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

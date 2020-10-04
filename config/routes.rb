@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :event_slots, only: [:new]
   end
   resources :event_slots, only: [:create, :edit, :update, :destroy]
+  resources :slots
   resources :donations, only: :index
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'admin', to: 'pages#admin', as: :admin
