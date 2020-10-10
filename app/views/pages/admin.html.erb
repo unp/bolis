@@ -17,13 +17,15 @@
     <tr>
       <th scope="col">Donor</th>
       <th scope="col">Type</th>
+      <th scope="col">Slots Remaining</th>
       <th scope="col">Amount</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     <% @events.each do |event| %>
       <tr class="table-secondary">
-        <th colspan="4">
+        <th colspan="5">
           <%= event.name %>
           <span class="dropdown" style="float:right;">
             <button class="btn btn-sm btn-outline-secondary dropdown-toggle no-caret" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,20 +43,26 @@
         </th>
       </tr>
       <% event.event_slots.each do |event_slot| %>
-        <tr class="table<%= event_slot.donation ? "-success" : (event_slot.event.donation_type == "nakaro" ? "-warning" : "") %>">
+        <tr class="table<%= event_slot.available? ? (event_slot.event.donation_type == "nakaro" && event_slot.donor_limit ? "-warning" : "") : "-success" %>">
           <td>
-            <div><strong><%= event_slot.donation.try(:name) %></strong></div>
-            <div><%= event_slot.donation.try(:email) %></div>
-            <div><%= event_slot.donation.try(:phone) %></div>
+            <% event_slot.donations.each do |donation| %>
+              <div><strong><%= donation.name %></strong></div>
+              <div><%= donation.email %></div>
+              <div><%= donation.phone %></div>
+            <% end %>
             <% if event_slot.event.donation_type == 'boli' %>
               <div>Available at ghee boli</div>
-            <% else %>
-              <div><%= link_to 'Not Taken – Sign Up', new_donation_path(id: event.id) unless event_slot.donation %></div>
+            <% elsif event_slot.available? %>
+              <div><em>Slots Available – <%= link_to 'Sign Up', new_donation_path(id: event.id) if event_slot.available? %></em></div>
             <% end %>
           </td>
           <td><%= event_slot.slot.name %></td>
-          <td><%= number_to_currency(event_slot.donation.try(:amount)) %></td>
-          <td align="right"><%= link_to "Delete", event_slot, method: "delete", data: { confirm: "Are you sure you want to delete this slot? Any associated donation records will also be deleted.", disable_with: "Deleting..." }, class: "text-danger" %></td>
+          <td><%= event_slot.donor_limit.nil? ? 'Unlimited' : event_slot.donor_limit - event_slot.donations.count %></td>
+          <td><%= number_to_currency(event_slot.min_donation_amount) %></td>
+          <td align="right">
+            <%= link_to "Edit", edit_event_slot_path(event_slot) %>
+            <%= link_to "Delete", event_slot, method: "delete", data: { confirm: "Are you sure you want to delete this slot? Any associated donation records will also be deleted.", disable_with: "Deleting..." }, class: "text-danger" %>
+          </td>
         </tr>
       <% end %>
     <% end %>

@@ -27,9 +27,6 @@
           <%= event_slot.slot.description %>
         </span>
         <div><%= image_tag "jcoco_prime.png", width: '80px' if event_slot.slot.id == Slot.first.id && event_slot.event.prime_eligible %></div>
-        <% if !event_slot.available? %>
-          <strong>Labh taken by: </strong><%= event_slot.donation.name %>
-        <% end %>
       </label>
     </div>
     <% end %>

@@ -14,6 +14,6 @@ class Event < ApplicationRecord
   validates_presence_of :min_donation_amount, :name
 
   def open_slots
-    event_slots.select{ |event_slot| !event_slot.donation }
+    event_slots.select{ |event_slot| event_slot.available? }
   end
 end

@@ -38,6 +38,6 @@ class EventSlotsController < ApplicationController
   private
 
   def event_slot_params
-    params.require(:event_slot).permit(:event_id, :slot_id, :min_donation_amount)
+    params.require(:event_slot).permit(:event_id, :slot_id, :min_donation_amount, :donor_limit)
   end
 end

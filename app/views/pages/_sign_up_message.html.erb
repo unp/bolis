@@ -1,11 +1,16 @@
 <% if event.open_slots.count > 0 && event.donation_type == 'nakaro' %>
   <%= link_to 'Sign Up', new_donation_path(id: event.id), class: 'btn btn-sm btn-primary' %>
-<% elsif event.open_slots.count == 0 && event.donation_type == 'nakaro' %>
-  <% event.event_slots.each_with_index do |event_slot, index| %>
-    <div>
-      <%= "Family #{index + 1}: " if event.event_slots.length > 1 %>
-      <%= event_slot.donation.name %>
-    </div>
+<% end %>
+<% if event.donation_type == 'nakaro' %>
+  <% index = 1 %>
+  <% event.event_slots.each do |event_slot| %>
+    <% event_slot.donations.each do |donation| %>
+      <div>
+        <%= "Family #{index}: " if event.event_slots.length > 1 %>
+        <%= event_slot.donations.first.try(:name) %>
+      <div>
+      <% index += 1 %>
+    <% end %>
   <% end %>
 <% elsif event.donation_type == 'boli' %>
   Available at ghee boli

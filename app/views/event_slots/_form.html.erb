@@ -12,6 +12,7 @@
   <% end %>
   <%= f.collection_select(:slot_id, Slot.all, :id, :name, label: "Slot Type" ) %>
   <%= f.text_field :min_donation_amount, :class => 'amount', :value => (number_with_precision(f.object.min_donation_amount, :precision => 2) || 0), prepend: ['$'] %>
+  <%= f.number_field :donor_limit, label: "Maximum number of sign ups", placeholder: "Leave blank for unlimited" %>
   <%= f.hidden_field :event_id %>
   <div style="text-align: right;">
     <%= link_to 'Cancel', admin_path, class: "btn" %>
