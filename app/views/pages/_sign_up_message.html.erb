@@ -7,7 +7,7 @@
     <% event_slot.donations.each do |donation| %>
       <div>
         <%= "Family #{index}: " if event.event_slots.length > 1 %>
-        <%= event_slot.donations.first.try(:name) %>
+        <%= donation.name %>
       <div>
       <% index += 1 %>
     <% end %>
