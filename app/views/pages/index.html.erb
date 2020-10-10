@@ -7,7 +7,6 @@
         <th scope="col">Event</th>
         <th scope="col">Type</th>
         <th scope="col"></th>
-        <th scope="col">Minimum Donation</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -20,7 +19,6 @@
           </td>
           <td><%= event.donation_type.capitalize %></td>
           <td><%= image_tag "jcoco_prime.png", width: '80px' if event.prime_eligible %></td>
-          <td><%= number_to_currency(event.min_donation_amount) %></td>
           <td>
             <%= render partial: 'sign_up_message', locals: { event: event } %>
           </td>
