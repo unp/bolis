@@ -16,7 +16,7 @@
       >
       <label for="event_slot_<%= event_slot.id%>">
         <strong class="<%= 'disabled' unless event_slot.available? %>">
-          <%= event_slot.slot.name %>
+          <%= event_slot.slot.name %> (<%= number_to_currency(event_slot.min_donation_amount) %>)
         </strong>
         <% if event_slot.available? %>
           <span class="badge badge-primary">Available</span>
