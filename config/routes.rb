@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'events/:id/donations/new', to: 'donations#new', as: :new_donation
   post 'events/:id/donations', to: 'donations#create', as: :create_donation
 
-  resources :events, only: [:new, :create, :edit, :update, :destroy] do
+  resources :events, only: [:index, :new, :create, :edit, :update, :destroy] do
     resources :event_slots, only: [:new]
   end
   resources :event_slots, only: [:create, :edit, :update, :destroy]
