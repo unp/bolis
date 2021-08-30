@@ -26,7 +26,7 @@
         <span class="<%= 'disabled' unless event_slot.available? %>">
           <%= event_slot.slot.description %>
         </span>
-        <div><%= image_tag "jcoco_prime.png", width: '80px' if event_slot.slot.id == Slot.first.id && event_slot.event.prime_eligible %></div>
+        <div><%= image_tag "jcoco_prime.png", width: '80px' if event_slot.slot.id != Slot.last.id && event_slot.event.prime_eligible %></div>
       </label>
     </div>
     <% end %>
