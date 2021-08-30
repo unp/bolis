@@ -12,6 +12,7 @@
   <% end %>
   <%= f.text_field :name %>
   <%= f.text_field :description %>
+  <%= f.check_box :prime_eligible, label: "Prime Eligible" %>
   <div style="text-align: right;">
     <%= link_to 'Cancel', slots_path, class: "btn" %>
     <%= f.primary "Save", id: "submit" %>

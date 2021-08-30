@@ -41,6 +41,6 @@ class SlotsController < ApplicationController
   private
 
   def slot_params
-    params.require(:slot).permit(:name, :description)
+    params.require(:slot).permit(:name, :description, :prime_eligible)
   end
 end
