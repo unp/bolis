@@ -32,16 +32,6 @@ class Event < ApplicationRecord
                   event.donation_type,
                   ActiveSupport::NumberHelper.number_to_currency(donation.amount)
                 ]
-              else
-                csv << [
-                  event.name,
-                  event_slot.slot.name,
-                  "",
-                  "",
-                  "",
-                  event.donation_type,
-                  ActiveSupport::NumberHelper.number_to_currency(event_slot.min_donation_amount)
-                ]
               end
             end
           else
