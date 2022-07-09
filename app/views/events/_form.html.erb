@@ -14,6 +14,8 @@
   <%= f.select(:donation_type, [["Nakaro", "nakaro"], ["Boli", "boli"]], label: "Donation Type" ) %>
   <%= f.text_field :times %>
   <%= f.text_field :min_donation_amount, :class => 'amount', :value => (number_with_precision(f.object.min_donation_amount, :precision => 2) || 0), prepend: ['$'] %>
+  <%= f.number_field :max_sign_ups, label: "Maximum number of sign ups", placeholder: "Leave blank for unlimited" %>
+  <%= f.hidden_field :site_id %>
   <%= f.check_box :prime_eligible, label: "Prime Eligible" %>
   <div style="text-align: right;">
     <%= link_to 'Cancel', admin_path, class: "btn" %>

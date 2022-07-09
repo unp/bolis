@@ -10,7 +10,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
+    @event = Event.new(site_id: params.require(:site))
   end
 
   def create
@@ -51,7 +51,9 @@ class EventsController < ApplicationController
       :position,
       :times,
       :min_donation_amount,
+      :max_sign_ups,
       :prime_eligible,
-      :archived)
+      :archived,
+      :site_id)
   end
 end

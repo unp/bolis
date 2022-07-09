@@ -1,4 +1,4 @@
-<% if event.open_slots.count > 0 && event.donation_type == 'nakaro' %>
+<% if event.has_available_slots? && event.donation_type == 'nakaro' %>
   <%= link_to 'Sign Up', new_donation_path(id: event.id), class: 'btn btn-sm btn-primary' %>
 <% end %>
 <% if event.donation_type == 'nakaro' %>

@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   has_many :event_slots, dependent: :destroy
   has_many :slots, through: :event_slots
+  belongs_to :site
 
   acts_as_list
   scope :ordered_by_position, -> { order(position: :asc) }
@@ -76,5 +77,17 @@ class Event < ApplicationRecord
 
   def open_slots
     event_slots.select{ |event_slot| event_slot.available? }
+  end
+
+  def has_available_slots?
+    open_slots.count > 0 && !self.reached_max_sign_ups?
+  end
+
+  def reached_max_sign_ups?
+    return false if self.max_sign_ups.nil?
+    sign_ups = self.event_slots.inject(0) do |donations, event_slot|
+      donations + event_slot.donations.count
+    end
+    self.max_sign_ups <= sign_ups
   end
 end

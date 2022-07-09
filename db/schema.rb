@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_30_155232) do
+ActiveRecord::Schema.define(version: 2022_07_07_202129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 2021_08_30_155232) do
     t.boolean "prime_eligible", default: false, null: false
     t.string "times"
     t.boolean "archived", default: false
+    t.integer "site_id", null: false
+    t.integer "max_sign_ups"
   end
 
   create_table "sites", force: :cascade do |t|
