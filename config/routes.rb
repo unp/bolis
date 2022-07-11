@@ -12,5 +12,11 @@ Rails.application.routes.draw do
   resources :donations, only: :index
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'admin', to: 'pages#admin', as: :admin
+  
+  get 'pratishtha', to: 'pages#pratishtha', as: :pratishtha
+  get 'sattarbhedi', to: 'pages#sattarbhedi', as: :sattarbhedi
+  get 'abhishek', to: 'pages#abhishek', as: :abhishek
+  get 'patla', to: 'pages#patla', as: :patla
+
   root 'pages#index'
 end

@@ -1,3 +1,25 @@
 // Place all the styles related to the Pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.day {
+    margin-bottom: 20px;
+    padding-bottom: 0;
+}
+
+.register {
+    flex: 1;
+    text-align: right;
+}
+
+.day-wrapper {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.banner {
+    max-width: auto;
+    width: 100%;
+    margin-top: -40px;
+    margin-bottom: 40px;
+}

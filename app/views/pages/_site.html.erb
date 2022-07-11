@@ -1,0 +1,47 @@
+<h2><%= site.title%></h2>
+<p><%= simple_format(site.description) %></p>
+<div class="d-none d-md-block">
+  <table class="table" style="margin-top: 2em;">
+    <thead>
+      <tr>
+        <th scope="col">Event</th>
+        <th scope="col">Type</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% site.events.not_archived.ordered_by_position.each do |event| %>
+        <tr>
+          <td>
+            <div><%= event.name %></div>
+            <div><em><%= event.times %></em></div>
+          </td>
+          <td><%= event.donation_type.capitalize %></td>
+          <td><%= image_tag "jcoco_prime.png", width: '80px' if event.prime_eligible %></td>
+          <td>
+            <%= render partial: 'sign_up_message', locals: { event: event } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="d-block d-md-none">
+  <% site.events.not_archived.ordered_by_position.each do |event| %>
+    <div class="row py-2">
+      <div class="col">
+        <div><strong><%= event.name %></strong></div>
+        <div><em><%= event.times %></em></div>
+        <%= event.donation_type.capitalize %>
+        (<%= "Min. " if event.donation_type == 'boli' %><%= number_to_currency(event.min_donation_amount) %>)
+        <% if event.prime_eligible %>
+          <div><%= image_tag "jcoco_prime.png", width: '80px' %></div>
+        <% end %>
+      </div>
+      <div class="col" align="right">
+        <%= render partial: 'sign_up_message', locals: { event: event } %>
+      </div>
+    </div>
+  <% end %>
+</div>
