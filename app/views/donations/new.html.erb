@@ -35,10 +35,9 @@
     <% if @donation.errors[:base].length > 0 %>
       <div class="alert alert-danger">
         <p>Please fix the errors below.</p>
-        <%= @errors.inspect %>
         <ul class="rails-bootstrap-forms-error-summary">
           <% @donation.errors[:base].each do |error| %>
-            <li><%= error.message %></li>
+            <li><%= error %></li>
           <% end %>
         </ul>
       </div>
