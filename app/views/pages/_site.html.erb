@@ -8,6 +8,7 @@
         <th scope="col">Type</th>
         <th scope="col"></th>
         <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -18,6 +19,7 @@
             <div><em><%= event.times %></em></div>
           </td>
           <td><%= event.donation_type.capitalize %></td>
+          <td><%= "Min. " if event.donation_type == 'boli' %><%= number_to_currency(event.min_donation_amount) %></td>
           <td><%= image_tag "jcoco_prime.png", width: '80px' if event.prime_eligible %></td>
           <td>
             <%= render partial: 'sign_up_message', locals: { event: event } %>
