@@ -3,6 +3,7 @@ class PagesController < ApplicationController
 
   def index
     @sites = Site.all
+    render(layout: "home")
   end
 
   def pratishtha

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JCOCO Ghee Boli</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= image_tag "temple.jpg", class: "banner" %>
+    <div class="container" style="margin: 40px auto;">
+        <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>">
+            <a href="#" data-dismiss="alert" class="close">×</a>
+            <%= value %>
+        </div>
+        <% end %>
+        <%= yield %>
+    </div>
+  </body>
+</html>
