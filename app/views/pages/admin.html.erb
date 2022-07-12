@@ -3,7 +3,11 @@
     <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
   </div>
 <% end %>
+<h2>Summary</h2>
+<strong>Total Pledges:</strong>
+<%= ActiveSupport::NumberHelper.number_to_currency(Donation.all.sum(:amount)) %>
 <% @sites.all.each do |site| %>
+  <hr style="margin: 60px 0;" />
   <h2><%= site.title %></h2>
   <p><%= simple_format(site.description) %></p>
   <%= link_to "Edit title and description", edit_site_path(site) %>
