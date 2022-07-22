@@ -54,6 +54,7 @@
                 <div><strong><%= donation.name %></strong></div>
                 <div><%= donation.email %></div>
                 <div><%= donation.phone %></div>
+                <%= link_to "Delete Pledge", donation, method: "delete", data: { confirm: "Are you sure you want to delete this pledge?", disable_with: "Deleting..." }, class: "dropdown-item text-danger" %>
               <% end %>
               <% if event_slot.event.donation_type == 'boli' %>
                 <div>Available at ghee boli</div>
