@@ -3,27 +3,12 @@ class PagesController < ApplicationController
 
   def index
     @sites = Site.all
-    render(layout: "home")
-  end
-
-  def pratishtha
-    @site = Site.find(1)
-    render "site"
-  end
-
-  def sattarbhedi
-    @site = Site.find(2)
-    render "site"
-  end
-
-  def abhishek
-    @site = Site.find(3)
-    render "site"
-  end
-
-  def patla
-    @site = Site.find(4)
-    render "site"
+    if @sites.length == 1
+      @site = @sites.first
+      render 'sites/show', layout: "home"
+    else
+      render(layout: "home")
+    end
   end
 
   def admin

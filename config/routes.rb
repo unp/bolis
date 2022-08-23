@@ -8,15 +8,10 @@ Rails.application.routes.draw do
   end
   resources :event_slots, only: [:create, :edit, :update, :destroy]
   resources :slots
-  resources :sites, only: [:edit, :update]
+  resources :sites, only: [:show, :edit, :update]
   resources :donations, only: [:index, :destroy]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get 'admin', to: 'pages#admin', as: :admin
-
-  get 'pratishtha', to: 'pages#pratishtha', as: :pratishtha
-  get 'sattarbhedi', to: 'pages#sattarbhedi', as: :sattarbhedi
-  get 'abhishek', to: 'pages#abhishek', as: :abhishek
-  get 'patla', to: 'pages#patla', as: :patla
 
   root 'pages#index'
 end

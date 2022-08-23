@@ -1,38 +1,19 @@
 <div class="day-wrapper">
-    <h2>JCOCO 10th Anniversary &amp; Chovisi Pratishtha Mahotsav</h2>
+    <h2>Jain Center of Central Ohio</h2>
     <br />
-    <strong>July 21-25, 2022</strong>
     <p>
         6683 South Old State Rd
         <br />
         Lewis Center, OH 43035
     </p>
-    <div class="slot day">
-        <div>
-            <h3>Patla Poojan</h3>
-            <p>Friday, July 22, 2022</p>
-        </div>
-        <div class="register"><%= link_to 'Register', patla_path, class: 'btn btn-primary' %></div>
-    </div>
-    <div class="slot day">
-        <div>
-            <h3>18 Abhishek Poojan</h3>
-            <p>Saturday, July 23, 2022</p>
-        </div>
-        <div class="register"><%= link_to 'Register', abhishek_path, class: 'btn btn-primary' %></div>
-    </div>
-    <div class="slot day">
-        <div>
-            <h3>Pratishtha Poojan</h3>
-            <p>Sunday, July 24, 2022</p>
-        </div>
-        <div class="register"><%= link_to 'Register', pratishtha_path, class: 'btn btn-primary' %></div>
-    </div>
-    <div class="slot day">
-        <div>
-            <h3>Sattarbhedi Poojan</h3>
-            <p>Sunday, July 24, 2022</p>
-        </div>
-        <div class="register"><%= link_to 'Register', sattarbhedi_path, class: 'btn btn-primary' %></div>
-    </div>
+    <br />
+    <% @sites.each do |site| %>
+      <div class="slot day">
+          <div>
+              <h3><%= site.title %></h3>
+              <p><%= site.description %></p>
+          </div>
+          <div class="register"><%= link_to 'Register', site_path(site), class: 'btn btn-primary' %></div>
+      </div>
+    <% end %>
 </div>

@@ -1,5 +1,9 @@
 class SitesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :show
+
+  def show
+    @site = Site.find(params[:id])
+  end
 
   def edit
     @site = Site.find(params[:id])

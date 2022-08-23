@@ -1,8 +1,10 @@
-<h2><%= site.title%></h2>
-<p><%= simple_format(site.description) %></p>
+<h2><%= @site.title %></h2>
+<p><%= simple_format(@site.description) %></p>
 <div class="d-none d-md-block">
   <br />
-  <%= link_to "← Back to All Events", root_path, class: 'btn' %>
+  <% if Site.all.length > 1 %>
+    <%= link_to "← Back to All Events", root_path, class: 'btn' %>
+  <% end %>
   <table class="table" style="margin-top: 2em;">
     <thead>
       <tr>
@@ -14,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <% site.events.not_archived.ordered_by_position.each do |event| %>
+      <% @site.events.not_archived.ordered_by_position.each do |event| %>
         <tr>
           <td>
             <div><%= event.name %></div>
@@ -24,7 +26,7 @@
           <td><%= "Min. " if event.donation_type == 'boli' %><%= number_to_currency(event.min_donation_amount) %></td>
           <td><%= image_tag "jcoco_prime.png", width: '80px' if event.prime_eligible %></td>
           <td>
-            <%= render partial: 'sign_up_message', locals: { event: event } %>
+            <%= render partial: 'sites/sign_up_message', locals: { event: event } %>
           </td>
         </tr>
       <% end %>
@@ -32,7 +34,7 @@
   </table>
 </div>
 <div class="d-block d-md-none">
-  <% site.events.not_archived.ordered_by_position.each do |event| %>
+  <% @site.events.not_archived.ordered_by_position.each do |event| %>
     <div class="row py-2">
       <div class="col">
         <div><strong><%= event.name %></strong></div>
@@ -44,7 +46,7 @@
         <% end %>
       </div>
       <div class="col" align="right">
-        <%= render partial: 'sign_up_message', locals: { event: event } %>
+        <%= render partial: 'sites/sign_up_message', locals: { event: event } %>
       </div>
     </div>
   <% end %>
